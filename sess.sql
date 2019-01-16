@@ -1,10 +1,3 @@
-sess.sql
-Earlier this month
-2 Jan
-
-You uploaded an item
-SQL
-sess.sql
 /*
    Name:    sess.sql
    Date:    March 2004
@@ -13,10 +6,10 @@ sess.sql
 
    Prerequisites: User must have access to certain V$ tables. Listed below:
 
-grant select on v_$database to jan;
-grant select on v_$session to jan;
-grant select on v_$process to jan;
-grant select on v_$sql to jan;
+grant select on v_$database to <username>;
+grant select on v_$session to <username>;
+grant select on v_$process to <username>;
+grant select on v_$sql to <username>;
 */
 
 col first_change# format 999,999,999,999,999
@@ -45,19 +38,20 @@ s.osuser, s.username, module, s.sid
 --TO_NUMBER(p.spid)
 */
 --USERNAME OSUSER    MACHINE         Module/Program                pid     ACTION          STATUS   LOGON_TIME         CPU secs
+SET PAGESIZE 44
 
 SET LINES 200
 UNDEF sid
-COL sid FORMAT 99999
-COL username FORMAT A9
-COL osuser FORMAT A10
-COL machine FORMAT A20 
-COL program FORMAT A26 NOPRINT 
-COL spid HEADING "pid" FORMAT A7 NEW_VALUE pid
+COL sid FORMAT 9999
+COL username FORMAT A8
+COL osuser FORMAT A7
+COL machine FORMAT A21 
+COL program FORMAT A28 NOPRINT 
+COL spid HEADING "pid" FORMAT A5 NEW_VALUE pid
 COL client_info FORMAT A10
 COL client_identifier FORMAT A10
-COL module FORMAT A40 PRINT HEADING "Module/Program"
-COL action FORMAT A24 PRINT
+COL module FORMAT A41 PRINT HEADING "Module/Program"
+COL action FORMAT A26 PRINT
 COL serial# HEADING "Srlno" FORMAT 99999
 COL command_name FORMAT A7 HEADING "Command"
 COL cpu FORMAT 999,999 HEADING "CPU secs"
